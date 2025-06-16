@@ -1,0 +1,399 @@
+        <!-- Seção Campanhas -->
+        <div id="campaignsContent" class="dashboard-content hidden">
+            <div class="row">
+                <div class="col-12">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h2><i class="fas fa-bullhorn text-primary"></i> Campanhas</h2>
+                        <button class="btn btn-primary" onclick="showCreateCampaignModal()">
+                            <i class="fas fa-plus"></i> Nova Campanha
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <i class="fas fa-play-circle fa-2x text-success mb-2"></i>
+                            <h5>Campanhas Ativas</h5>
+                            <h3 class="text-success" id="activeCampaigns">0</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <i class="fas fa-clock fa-2x text-warning mb-2"></i>
+                            <h5>Agendadas</h5>
+                            <h3 class="text-warning" id="scheduledCampaigns">0</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <i class="fas fa-check-circle fa-2x text-info mb-2"></i>
+                            <h5>Concluídas</h5>
+                            <h3 class="text-info" id="completedCampaigns">0</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <h5><i class="fas fa-list"></i> Lista de Campanhas</h5>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Nome</th>
+                                    <th>Tipo</th>
+                                    <th>Status</th>
+                                    <th>Criada em</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody id="campaignsTable">
+                                <tr>
+                                    <td colspan="5" class="text-center text-muted">
+                                        <i class="fas fa-inbox fa-2x mb-2"></i><br>
+                                        Nenhuma campanha criada ainda
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Seção Clientes -->
+        <div id="clientsContent" class="dashboard-content hidden">
+            <div class="row">
+                <div class="col-12">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h2><i class="fas fa-users text-primary"></i> Clientes</h2>
+                        <div>
+                            <button class="btn btn-outline-primary me-2" onclick="showImportModal()">
+                                <i class="fas fa-upload"></i> Importar CSV
+                            </button>
+                            <button class="btn btn-primary" onclick="showAddClientModal()">
+                                <i class="fas fa-user-plus"></i> Novo Cliente
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-3 mb-3">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <i class="fas fa-users fa-2x text-primary mb-2"></i>
+                            <h5>Total de Clientes</h5>
+                            <h3 class="text-primary" id="totalClientsCount">0</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <i class="fas fa-star fa-2x text-warning mb-2"></i>
+                            <h5>VIP</h5>
+                            <h3 class="text-warning" id="vipClientsCount">0</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <i class="fas fa-heart fa-2x text-success mb-2"></i>
+                            <h5>Frequentes</h5>
+                            <h3 class="text-success" id="frequentClientsCount">0</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <i class="fas fa-user-plus fa-2x text-info mb-2"></i>
+                            <h5>Novos</h5>
+                            <h3 class="text-info" id="newClientsCount">0</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h5><i class="fas fa-list"></i> Lista de Clientes</h5>
+                        <div class="input-group" style="width: 300px;">
+                            <input type="text" class="form-control" placeholder="Buscar clientes..." id="clientSearch">
+                            <button class="btn btn-outline-secondary" type="button">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Nome</th>
+                                    <th>Telefone</th>
+                                    <th>Email</th>
+                                    <th>Segmento</th>
+                                    <th>Último Pedido</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody id="clientsTable">
+                                <tr>
+                                    <td colspan="6" class="text-center text-muted">
+                                        <i class="fas fa-user-friends fa-2x mb-2"></i><br>
+                                        Nenhum cliente cadastrado ainda
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Seção Redes Sociais -->
+        <div id="socialContent" class="dashboard-content hidden">
+            <div class="row">
+                <div class="col-12">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h2><i class="fas fa-share-alt text-primary"></i> Redes Sociais</h2>
+                        <button class="btn btn-primary" onclick="showCreatePostModal()">
+                            <i class="fas fa-plus"></i> Nova Postagem
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <i class="fab fa-instagram fa-2x text-danger mb-2"></i>
+                            <h5>Instagram</h5>
+                            <p class="text-muted">Status: <span class="badge bg-success">Conectado</span></p>
+                            <button class="btn btn-outline-danger btn-sm">Configurar</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <i class="fab fa-facebook fa-2x text-primary mb-2"></i>
+                            <h5>Facebook</h5>
+                            <p class="text-muted">Status: <span class="badge bg-warning">Pendente</span></p>
+                            <button class="btn btn-outline-primary btn-sm">Conectar</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <i class="fab fa-tiktok fa-2x text-dark mb-2"></i>
+                            <h5>TikTok</h5>
+                            <p class="text-muted">Status: <span class="badge bg-secondary">Desconectado</span></p>
+                            <button class="btn btn-outline-dark btn-sm">Conectar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <h5><i class="fas fa-calendar-alt"></i> Postagens Agendadas</h5>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Conteúdo</th>
+                                    <th>Plataformas</th>
+                                    <th>Data/Hora</th>
+                                    <th>Status</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody id="postsTable">
+                                <tr>
+                                    <td colspan="5" class="text-center text-muted">
+                                        <i class="fas fa-calendar-times fa-2x mb-2"></i><br>
+                                        Nenhuma postagem agendada
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Seção Analytics -->
+        <div id="analyticsContent" class="dashboard-content hidden">
+            <div class="row">
+                <div class="col-12">
+                    <h2 class="mb-4"><i class="fas fa-chart-line text-primary"></i> Analytics</h2>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5><i class="fas fa-envelope"></i> Performance de Campanhas</h5>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="campaignChart" width="400" height="200"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5><i class="fas fa-users"></i> Crescimento de Clientes</h5>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="clientGrowthChart" width="400" height="200"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <i class="fas fa-eye fa-2x text-info mb-2"></i>
+                            <h5>Taxa de Abertura</h5>
+                            <h3 class="text-info">68.5%</h3>
+                            <small class="text-muted">+5.2% vs mês anterior</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <i class="fas fa-mouse-pointer fa-2x text-success mb-2"></i>
+                            <h5>Taxa de Clique</h5>
+                            <h3 class="text-success">12.3%</h3>
+                            <small class="text-muted">+2.1% vs mês anterior</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <i class="fas fa-shopping-cart fa-2x text-warning mb-2"></i>
+                            <h5>Conversão</h5>
+                            <h3 class="text-warning">8.7%</h3>
+                            <small class="text-muted">+1.3% vs mês anterior</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Seção Configurações -->
+        <div id="settingsContent" class="dashboard-content hidden">
+            <div class="row">
+                <div class="col-12">
+                    <h2 class="mb-4"><i class="fas fa-cog text-primary"></i> Configurações</h2>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h5><i class="fas fa-user"></i> Perfil do Usuário</h5>
+                        </div>
+                        <div class="card-body">
+                            <form id="profileForm">
+                                <div class="mb-3">
+                                    <label class="form-label">Nome Completo</label>
+                                    <input type="text" class="form-control" id="profileFullName">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="profileEmail">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Empresa</label>
+                                    <input type="text" class="form-control" id="profileCompany">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Telefone</label>
+                                    <input type="text" class="form-control" id="profilePhone">
+                                </div>
+                                <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h5><i class="fab fa-whatsapp"></i> Configurações WhatsApp</h5>
+                        </div>
+                        <div class="card-body">
+                            <form id="whatsappForm">
+                                <div class="mb-3">
+                                    <label class="form-label">URL da Evolution API</label>
+                                    <input type="url" class="form-control" id="evolutionApiUrl" placeholder="https://sua-api.com">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">API Key</label>
+                                    <input type="text" class="form-control" id="evolutionApiKey" placeholder="Sua chave da API">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Nome da Instância</label>
+                                    <input type="text" class="form-control" id="evolutionInstance" placeholder="minha-instancia">
+                                </div>
+                                <button type="submit" class="btn btn-success">Salvar Configurações</button>
+                                <button type="button" class="btn btn-outline-success ms-2" onclick="testWhatsAppConnection()">Testar Conexão</button>
+                            </form>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <h5><i class="fas fa-shield-alt"></i> Segurança</h5>
+                        </div>
+                        <div class="card-body">
+                            <form id="passwordForm">
+                                <div class="mb-3">
+                                    <label class="form-label">Senha Atual</label>
+                                    <input type="password" class="form-control" id="currentPassword">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Nova Senha</label>
+                                    <input type="password" class="form-control" id="newPassword">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Confirmar Nova Senha</label>
+                                    <input type="password" class="form-control" id="confirmPassword">
+                                </div>
+                                <button type="submit" class="btn btn-warning">Alterar Senha</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
