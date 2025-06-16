@@ -15,7 +15,7 @@ from src.routes.crm import crm_bp
 from src.routes.auth import auth_bp
 
 app = Flask(__name__, static_folder=os.path.join(os.path.dirname(__file__), 'static'))
-app.config['SECRET_KEY'] = 'asdf#FGSgvasgf$5$WGT'
+app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'asdf#FGSgvasgf$5$WGT')
 
 # Habilitar CORS para todas as rotas
 CORS(app)
@@ -29,6 +29,16 @@ login_manager.login_view = 'auth.login'
 def load_user(user_id):
     return User.query.get(int(user_id))
 
+# Configuração do banco de dados
+if os.getenv('VERCEL'):
+    # Para produção (Vercel) - usar PostgreSQL
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
+else:
+    # Para desenvolvimento local (SQLite)
+    app.config['SQLALCHEMY_DATABASE_URI'] = f"sqlite:///{os.path.join(os.path.dirname(__file__), 'database', 'app.db')}"
+
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
 # Registrar blueprints
 app.register_blueprint(user_bp, url_prefix='/api')
 app.register_blueprint(campaign_bp, url_prefix='/api')
@@ -37,19 +47,10 @@ app.register_blueprint(social_bp, url_prefix='/api')
 app.register_blueprint(crm_bp, url_prefix='/api')
 app.register_blueprint(auth_bp, url_prefix='/api')
 
-# Configuração do banco de dados
-# Para desenvolvimento local (SQLite)
-if os.getenv('FLASK_ENV') == 'development':
-    app.config['SQLALCHEMY_DATABASE_URI'] = f"sqlite:///{os.path.join(os.path.dirname(__file__), 'database', 'app.db')}"
-# Para produção (Vercel) - usar SQLite em memória
-elif os.getenv('VERCEL'):
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:'
-# Para produção (PostgreSQL)
-else:
-    app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
-
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+# Inicializar o banco de dados
 db.init_app(app)
+
+# Criar as tabelas
 with app.app_context():
     db.create_all()
 
