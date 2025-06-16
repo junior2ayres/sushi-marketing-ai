@@ -39,10 +39,13 @@ app.register_blueprint(auth_bp, url_prefix='/api')
 
 # Configuração do banco de dados
 # Para desenvolvimento local (SQLite)
-if os.getenv('FLASK_ENV') == 'development' or not os.getenv('DATABASE_URL'):
+if os.getenv('FLASK_ENV') == 'development':
     app.config['SQLALCHEMY_DATABASE_URI'] = f"sqlite:///{os.path.join(os.path.dirname(__file__), 'database', 'app.db')}"
+# Para produção (Vercel) - usar SQLite em memória
+elif os.getenv('VERCEL'):
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:'
+# Para produção (PostgreSQL)
 else:
-    # Para produção (PostgreSQL)
     app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
